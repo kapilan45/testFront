@@ -1,0 +1,263 @@
+
+<div class="row">
+  <div class="col-sm-12 col-12 col-sm-6 mb-2">
+    <h1 *ngIf="annonceId == null" >Dépôt d'annonce</h1>
+    <h1 *ngIf="annonceId != null" >Modifier l'annonce</h1>
+  </div>
+</div>
+
+<form [formGroup]="annonceForm" (ngSubmit)="deposerAnnonce()" >
+  <div class="container">
+    <div class="row">
+      <!-- Détail voiture -->
+      <div class="col-md-6 col-sm-12 col-12">
+        <div class="form-group row">
+          <div class="col-sm-12 col-12">
+            <label>Marque</label>
+            <input type="text" class="form-control" formControlName="make" list="makes_list" (change)="activateChamp()">
+              <datalist id="makes_list">
+                <option *ngFor="let makelist of annonceService.makes; let i = index" [value]="annonceService.makes[i].make">
+              </datalist>
+          </div>
+        </div>
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Modèle</label>
+            <fieldset [disabled]="isMake">
+            <input type="text" class="form-control" formControlName="model" list="modeles_list" (change)="isModele = false">
+              <datalist id="modeles_list">
+                <option *ngFor="let modelelist of annonceService.models; let m = index" [value]="annonceService.models[m].model" >
+              </datalist>
+            </fieldset>
+          </div>
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Catégorie</label>
+            <fieldset [disabled]="isModele">
+              <input type="text" class="form-control" formControlName="category" list="categories_list" (change)="isCategory = false">
+              <datalist id="categories_list">
+                <option *ngFor="let categorylist of annonceService.categories; let c = index" [value]="annonceService.categories[c].category" >
+              </datalist>
+            </fieldset>
+
+          </div>
+        </div>
+
+
+
+        <fieldset [disabled]="isCategory">
+
+          <div class="form-group row ">
+            <div class="col-12">
+              <label>Version / finition</label>
+              <input type="text" class="form-control" formControlName="trim">
+            </div>
+          </div>
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Année</label>
+            <input type="number" class="form-control" formControlName="year" [max]="2020">
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Energie</label>
+            <input type="text" class="form-control" formControlName="energy" list="energies_list">
+            <datalist id="energies_list">
+              <option *ngFor="let energie of annonceService.energies; let i = index" [value]="annonceService.energies[i].energy">
+            </datalist>
+         </div>
+      </div>
+
+          <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Consommation</label>
+            <input type="text" class="form-control" formControlName="fuelEconomy" [max]="2020">
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Consommation depuis reprogrammation</label>
+            <input type="text " class="form-control" formControlName="fuelEconomySinceTheLatestModification">
+         </div>
+      </div>
+
+        <div class="form-group row ">
+          <div class="col-md-3 col-6">
+            <label>Nb place</label>
+            <input type="number" class="form-control" formControlName="numberOfSeats" [max]="7">
+          </div>
+          <div class="col-md-3 col-6">
+            <label>Nb porte</label>
+            <input type="number" class="form-control" formControlName="numberOfDoor" [max]="7">
+          </div>
+          <div class="col-md-3 col-6">
+            <label>CH</label>
+            <input type="number" class="form-control" formControlName="horsePower">
+          </div>
+          <div class="col-md-3 col-6">
+            <label>CV</label>
+            <input type="number" class="form-control" formControlName="fiscalHorsePower">
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Date d'immatriculation</label>
+            <input type="date" class="form-control" formControlName="year">
+          </div>
+          <div class="col-md-3 col-sm-12 col-12">
+            <label>Norme Euro</label>
+            <select class="form-control" formControlName="euroNorme">
+              <option value="euro1">Euro 1</option>
+              <option value="euro2">Euro 2</option>
+              <option value="euro3">Euro 3</option>
+              <option value="euro4">Euro 4</option>
+              <option value="euro5">Euro 5</option>
+              <option value="euro6b">Euro 6b</option>
+              <option value="euro6c">Euro 6c</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 col-sm-12 col-12">
+            <label>CO2</label>
+            <input type="number" class="form-control" formControlName="co2">
+          </div>
+        </div>
+
+
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Kilométrage</label>
+            <input type="number" class="form-control" formControlName="mileage">
+          </div>
+          <div class="col-md-6 col-sm-12 col-12">
+          <label>Prix</label>
+          <input type="number" class="form-control" formControlName="price">
+        </div>
+        </div>
+
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Couleur intérieure</label>
+            <input type="text" class="form-control" formControlName="inSideColor">
+          </div>
+          <div class="col-md-6 col-sm-12 col-12">
+          <label>Couleur extérieure</label>
+          <input type="text" class="form-control" formControlName="outSideColor">
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <div class="col-md-6 col-sm-12 col-12">
+            <label>Localisation</label>
+            <input type="text" class="form-control" formControlName="localisation">
+          </div>
+          <div class="col-md-3 col-sm-12 col-12">
+            <label>C/moteur</label>
+            <input type="number" class="form-control" formControlName="driveType">
+          </div>
+          <div class="col-md-3 col-sm-12 col-12">
+            <label>Stage</label>
+            <input type="number"  class="form-control" formControlName="stage" [min]="0" [max]="3">
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group row ">
+          <div class="form-check col-md-6 col-sm-12 col-12">
+            <input type="checkbox" class="form-check-input" formControlName="firstHand" id="firstHand">
+            <label class="form-check-label"  for="firstHand">Premier main déclaratif </label>
+          </div>
+          <div class="form-check col-md-6 col-sm-12 col-12">
+            <input type="checkbox" class="form-check-input" formControlName="reinforcedCluth" id="reinforcedCluth">
+            <label class="form-check-label"  for="reinforcedCluth">Embrayage renforcé</label>
+          </div>
+          <div class="form-check col-md-6 col-sm-12 col-12">
+            <input type="checkbox" class="form-check-input" formControlName="technicalControl" id="technicalControl">
+            <label class="form-check-label"  for="technicalControl">Control techinque requis</label>
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <div class="col-sm-12 col-12">
+            <label>Description (Options, Information complémentaire) </label>
+            <textarea class="form-control" formControlName="options" maxlength="2000"></textarea>
+          </div>
+        </div>
+
+
+
+        </fieldset>
+      </div>
+
+<!--      Upload Image-->
+      <div class="col-md-6 col-sm-12 col-12">
+
+        <div class="row mb-2">
+          <div class="col-md-4 col-sm-12 col-12 image-upload border pt-2 pb-2" *ngFor="let i of [0,1,2]">
+              <div class="image-preview mb-3" *ngIf="annonceService.images[i]">
+                <img [src]="'data:image/png;base64,'+annonceService.images[i].path" class="upload-image" />
+              </div>
+
+              <i *ngIf="!annonceService.images[i]">
+                <i class="material-icons">add_a_photo</i>
+              </i>
+              <input type="file" (change)="uploadImage($event)" multiple />
+
+          </div>
+        </div>
+
+        <div class="row mb-4">
+
+          <div class="col-md-4 col-sm-12 col-12 image-upload border pt-2 pb-2" *ngFor="let i of [3,4,5]">
+            <div class="image-preview mb-3" *ngIf="annonceService.images[i]">
+              <img [src]="'data:image/png;base64,'+annonceService.images[i].path" class="upload-image" />
+            </div>
+
+            <i *ngIf="!annonceService.images[i]">
+              <i class="material-icons">add_a_photo</i>
+            </i>
+            <input type="file" (change)="uploadImage($event)" multiple />
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div>
+            Les factures <br>
+            Les fichiers joignables *
+          </div>
+
+          <div class="col-md-12 col-sm-12 col-12">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="uploadFichier($event)" accept="application/pdf">
+                <label class="custom-file-label" for="inputGroupFile01">Charger un fichier</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-12 col-12">
+            <label class="col-sm-12 col-12" *ngFor="let pj of attachements">{{pj.name}}</label>
+          </div>
+
+
+          <div class="border mt-3">Les fichiers possible : <br>entreien, changement des melement, factures des materiel </div>
+          <!-- les fichiers chargés -->
+        </div>
+
+      </div>
+
+      <div class="col-12">
+        <div class="form-group">
+          <button *ngIf="annonceId != null" class="btn btn-primary form-control col-md-6 col-12" type="submit">Modifier</button>
+          <button *ngIf="annonceId == null" class="btn btn-primary form-control col-md-6 col-12" type="submit">Déposer</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Gestion des annonces</h1>
+
+  <div *ngFor="let annonce of annonceService.annonces; let index = index">
+    <div class='row border' style="margin-bottom: 20px">
+      <div class="col-md-2">
+        <img *ngIf="annonce.images[0]" src="data:image/png;base64,{{annonce.images[0].path}}" alt="" width="100%" height="100%">
+        <img *ngIf="!annonce.images[0]" src="https://www.labaleine.fr/sites/default/files/image-not-found.jpg" width="100%" height="100%">
+
+      </div>
+      <div class="col-md-3">
+        <p>Marque : {{annonce.make}}</p>
+        <p>Modèle : {{annonce.model}}</p>
+        <p>Immatriculé : {{annonce.year}}</p>
+
+      </div>
+      <div class="col-md-2">
+        <p>Stage : {{annonce.stage}}</p>
+        <p class="text-justify-right"><strong>{{annonce.price}} € </strong> </p>
+      </div>
+
+      <div class="col-md-2">
+        <button class="form-control btn btn-link" (click)="offreDetail(index)" >Voir Détail</button>
+      </div>
+      <div class="col-md-2">
+        <button class="form-control btn-danger" (click)="supprimer(content, annonce)" [value]="index">Supprimer</button>
+        <button class="form-control btn-primary" (click)="modifier(index)">Modifier</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3>Comfirmation</h3>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Souhaitez-vous vraiment supprimer votre annonce ?</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="confirmSuppression()" >Supprimer</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Annuler</button>
+  </div>
+</ng-template>
+

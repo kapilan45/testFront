@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class='col-md-8'>
+    <gallery [items]="images"></gallery>
+  </div>
+
+  <div class="col-md-4">
+    <h4>Vendeur</h4>
+    <p>Name : {{annonce.user.username}}</p>
+    <p>Mail : {{annonce.user.mail}}</p>
+    <p>Prix : {{annonce.price}}</p>
+  </div>
+
+
+
+  <div class="col-12 mb-1 mt-4">
+    <h4>  {{annonce.make}} {{annonce.model}} {{annonce.category}} <!-- Marque modele finition (nom complet) ex : AUDI A3 III SPORTBACK 1.4 TFSI E-TRON 204 AMBITION LUXE S TRONIC --> </h4>
+  </div>
+  <div class="col-3">
+    <p>Année :  <strong>{{annonce.year | date:'yyyy'}}</strong> </p>
+    <p>Mise en circulation :  <strong>{{annonce.year | date: 'dd/MM/yyyy' }}</strong></p>
+    <p>Kilométrage au compteur :  <strong>{{annonce.mileage}}</strong> </p>
+    <p>Energie : <strong>{{annonce.energy}}</strong></p>
+    <p>Boîte de vitesse : <strong>{{annonce.gearbox}}</strong> </p>
+    <p>Nombre de portes : <strong>{{annonce.numberOfDoor}}</strong> </p>
+    <p>Couleur extérieure :  <strong>{{annonce.outSideColor}}</strong></p>
+    <p>Première main (déclaratif) : <strong>{{annonce.firstHand}}</strong></p>
+  </div>
+
+  <div class="col-6">
+    <p>Puissance fiscale : <strong>{{annonce.fiscalHorsePower}} CV</strong></p>
+    <p>Puissance din : <strong>{{annonce.horsePower}} CH</strong></p>
+
+    <p>Stage : <strong>{{annonce.stage}}</strong></p>
+    <p>Norme Euro : <strong>{{annonce.euroNorme}}</strong></p>
+    <p>Émissions de CO2 : <strong>{{annonce.co2}} g/km CH</strong></p>
+    <p>Nombre de places : <strong>{{annonce.numberOfSeats}}</strong></p>
+    <p>Couleur intérieure : <strong>{{annonce.inSideColor}}</strong></p>
+    <p>Description : <strong>{{annonce.options}}</strong></p>
+  </div>
+
+</div>

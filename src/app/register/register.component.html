@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-6 btn-login mb-2">
+    <h1 class="col-12">
+      Inscription
+    </h1>
+
+  </div>
+</div>
+
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="col-md-6 align-self-center" id="form_login">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" required="required" aria-describedby="emailHelp" formControlName="mail" placeholder="Enter email">
+  </div>
+  <div class="form-group" >
+    <label for="exampleInputUsername1">Username</label>
+    <input type="text" class="form-control" id="exampleInputUsername1" required="required" formControlName="username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Mot de passe</label>
+    <input type="password" class="form-control" id="exampleInputPassword1"  required="required" formControlName="password">
+  </div>
+  <div class="form-group ">
+    <button type="submit" class="btn btn-primary col-md-8 justify-content-center">S'inscrire</button>
+  </div>
+
+</form>
+
+
+<div class="row">
+  <div class="col-6 btn-login mb-2">
+    <label>
+      Si vous avez un compte : <a class="btn btn-link" routerLink="/login">Se connecter</a>
+    </label>
+
+  </div>
+</div>
